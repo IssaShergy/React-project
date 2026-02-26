@@ -1,0 +1,110 @@
+
+// React Hooks Cheat Sheet
+React.useEffect(() => {
+            // Runs the code after create, and after each update.
+ });
+React.useEffect(() => {
+            // Runs the code only after the first render (componentDidMount).
+        }, []);
+React.useEffect(() => {
+            // Runs the code after create, and after each update.
+            // Also runs the code when the component is unmounted (componentWillUnmount).
+            return () => {
+                // Cleanup code goes here.
+            };
+        });
+React.useEffect(() => {
+            // Runs the code only when the specified dependencies change.
+        }, [dependency1, dependency2]);
+   
+//ref
+const myRef = React.useRef(null);
+        // Access the DOM element using myRef.current
+        // Example: Focus an input element
+React.useEffect(() => {
+            if (myRef.current) {
+                myRef.current.focus();
+            }
+        }, []);
+//explain all Hooks with example
+//useState: Allows you to add state to functional components.
+example:
+const [count, setCount] = React.useState(0);
+        // To update the state, use the setCount function
+        const increment = () => {
+            setCount(count + 1);
+        };
+//useEffect: Allows you to perform side effects in functional components, such as fetching data or subscribing to events.
+example:
+React.useEffect(() => {
+            // Fetch data from an API
+            fetch('https://api.example.com/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Update state with the fetched data
+                    setData(data);
+                });
+        }, []); // Empty dependency array means this effect runs only once after the initial render.
+//useContext: Allows you to access the context value in functional components.
+example:
+const MyContext = React.createContext();
+        const MyComponent = () => {
+            const contextValue = React.useContext(MyContext);
+            return <div>{contextValue}</div>;
+        };
+//useReducer: Allows you to manage complex state logic in functional components using a reducer function.
+example:
+const initialState = { count: 0 };
+        const reducer = (state, action) => {
+            switch (action.type) {
+                case 'increment':
+                    return { count: state.count + 1 };
+                case 'decrement':
+                    return { count: state.count - 1 };
+                default:
+                    return state;
+            }
+        };
+        const MyComponent = () => {
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+            return (
+                <div>
+                    <p>Count: {state.count}</p>
+                    <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+                    <button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>
+                </div>
+            );
+        };
+//useRef: Allows you to create a mutable reference that persists across renders, often used for accessing DOM elements.
+example:
+const myRef = React.useRef(null);
+        // Access the DOM element using myRef.current
+        // Example: Focus an input element
+//useMemo: Allows you to memoize a value so that it is only recalculated when its dependencies change, improving performance.
+example:
+const memoizedValue = React.useMemo(() => {
+            // Expensive calculation goes here
+            return computeExpensiveValue(a, b);
+        }, [a, b]); // Only recompute when a or b changes
+//useCallback: Allows you to memoize a function so that it is only recreated when its dependencies change, improving performance.
+example:
+const memoizedCallback = React.useCallback(() => {
+            // Function logic goes here
+            doSomething(a, b);
+        }, [a, b]); // Only recreate the function when a or b changes
+-------------------------------------------------------
+npm create vite@6.0.1
+//Prettier ESLint  extntion
+تقوم بتفعيل Prettier و ESLint في مشروعك لضمان تنسيق الكود بشكل صحيح والتأكد من عدم وجود أخطاء في الكود. يمكنك تثبيت هذه الإضافات في محرر الأكواد الذي تستخدمه، مثل Visual Studio Code، وتكوينها لتعمل تلقائيًا عند حفظ الملفات.
+eslint = highlights problems
+in our JavaScript code 
+//package-lock.json
+يتم إنشاء ملف package-lock.json تلقائيًا عند تثبيت الحزم باستخدام npm. يحتوي هذا الملف على معلومات حول الحزم المثبتة وإصداراتها، ويستخدم لضمان أن يتم تثبيت نفس الإصدارات في كل مرة يتم فيها تشغيل npm install. يساعد هذا في الحفاظ على استقرار المشروع وتجنب المشاكل الناتجة عن تحديثات الحزم غير المتوافقة.
+//package.json
+يحتوي ملف package.json على معلومات حول المشروع، مثل اسم المشروع، الإصدار، الوصف، المؤلف، والاعتمادات (dependencies) التي يحتاجها المشروع للعمل. يتم استخدام هذا الملف لإدارة الحزم والمكتبات التي يعتمد عليها المشروع، ويمكن أيضًا تحديد سكريبتات (scripts) لتشغيل أو بناء المشروع بسهولة.
+//export
+تستخدم الكلمة المفتاحية export لتصدير المتغيرات أو الدوال أو الكائنات من ملف JavaScript بحيث يمكن استيرادها واستخدامها في ملفات أخرى. هناك نوعان رئيسيان من التصدير: التصدير الافتراضي (default export) والتصدير المسمى (named export).  
+the full command to set up React:
+
+npx create-vite@6.2.0 my-react-app --template react
+npm install react-router@7.1.5
